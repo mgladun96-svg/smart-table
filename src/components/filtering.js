@@ -33,6 +33,11 @@ export function initFiltering(elements, indexes) {
         }
 
         // @todo: #4.5 — отфильтровать данные используя компаратор
-        return data.filter(row => compare(row, state));
-    }
+        return data.filter(row => {
+        const matchesTotalFrom = !state.totalFrom || row.total >= parseFloat(state.totalFrom);
+        const matchesTotalTo = !state.totalTo || row.total <= parseFloat(state.totalTo);
+        // Добавьте другие условия фильтрации по полям (seller и т. д.)
+
+        return matchesTotalFrom && matchesTotalTo; // && другие условия
+        });
 }

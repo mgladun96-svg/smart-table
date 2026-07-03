@@ -7,7 +7,7 @@ export function initSearching(searchField) {
     rules: {
       ...rules.skipEmptyTargetValues,
       ...rules.searchMultipleFields(
-        searchField,
+        'search',
         ['date', 'customer', 'seller'],
         false
       )
@@ -16,7 +16,7 @@ export function initSearching(searchField) {
 
   return (data, state, action) => {
     // @todo: #5.2 — применить компаратор
-    const searchQuery = state[searchField] || '';
+    const searchQuery = state[searchField]?.trim().toLowerCase() || '';
 
     if (!searchQuery) {
       return data;
